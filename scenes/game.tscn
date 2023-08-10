@@ -1,20 +1,37 @@
-[gd_scene load_steps=5 format=3 uid="uid://45iww3bncu36"]
+[gd_scene load_steps=7 format=3 uid="uid://45iww3bncu36"]
 
 [ext_resource type="PackedScene" uid="uid://ce828qs48cc2j" path="res://scenes/world/world.tscn" id="1_5wrib"]
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_6uqpm"]
 [ext_resource type="PackedScene" uid="uid://dts7spmsrfa7u" path="res://scenes/entities/tank/tank.tscn" id="2_cvwbq"]
 [ext_resource type="PackedScene" uid="uid://bi8jj3iskqkxm" path="res://scenes/ui/ui.tscn" id="3_y1hlu"]
+[ext_resource type="PackedScene" uid="uid://ft674vshvv02" path="res://scenes/ui/camera.tscn" id="4_2aary"]
+[ext_resource type="AudioStream" uid="uid://dwdnv5f6fj6m2" path="res://assets/audio/music/Rolemusic - The White Frame.mp3" id="5_1ac86"]
 
-[node name="game" type="Node2D" node_paths=PackedStringArray("tank", "ui")]
+[node name="game" type="Node2D" node_paths=PackedStringArray("ui")]
 script = ExtResource("1_6uqpm")
-tank = NodePath("World/Tank")
+TankScene = ExtResource("2_cvwbq")
+WorldScene = ExtResource("1_5wrib")
 ui = NodePath("UILayer")
 
-[node name="World" parent="." instance=ExtResource("1_5wrib")]
-
-[node name="Tank" parent="World" node_paths=PackedStringArray("weapon") instance=ExtResource("2_cvwbq")]
-position = Vector2(234.114, 192.862)
-rotation = -0.000588424
-weapon = NodePath("../Tank/Weapon")
-
 [node name="UILayer" parent="." instance=ExtResource("3_y1hlu")]
+process_mode = 3
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("5_1ac86")
+volume_db = -15.0
+autoplay = true
+bus = &"Music"
+
+[node name="Camera2D" parent="." instance=ExtResource("4_2aary")]
+position = Vector2(234, 193)
+zoom = Vector2(2, 2)
+limit_bottom = 1570
+position_smoothing_enabled = false
+position_smoothing_speed = 2.0
+mode = 1
+
+[connection signal="menu_closed" from="UILayer" to="." method="_on_ui_layer_menu_closed"]
+[connection signal="menu_opened" from="UILayer" to="." method="_on_ui_layer_menu_opened"]
+[connection signal="quit_to_menu" from="UILayer" to="." method="_on_ui_layer_quit_to_menu"]
+[connection signal="start_game" from="UILayer" to="." method="_on_ui_layer_start_game"]

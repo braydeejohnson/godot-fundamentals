@@ -10,13 +10,14 @@ enum STATES { READY, FIRING, RELOADING }
 @export var tank: Tank
 
 @onready var reload_timer = $ReloadTimer
+@onready var audio_player = $AudioStreamPlayer
+
 
 var state: STATES = STATES.READY
 
 func _process(delta):
 	if !reload_timer.is_stopped():
 		reload_progress.emit(1 - (reload_timer.time_left / reload_timer.wait_time))
-		
 
 func change_state(new_state: STATES):
 	state = new_state
@@ -31,13 +32,15 @@ func fire():
 	bullet.direction = Vector2.from_angle(global_rotation)
 	bullet.global_position = global_position
 	bullet.tank = tank
+	audio_player.play()
+	
 	# Add the bullet to the root scene so translation is in world space
-	get_tree().root.add_child(bullet)
+	tank.get_parent().add_child(bullet)
 	# Set our state to reload and start our timer
 	change_state(STATES.RELOADING)
 	reload_timer.start()
-	
-	
+	if Game.INPUT_SCHEME == Game.INPUT_SCHEMES.GAMEPAD:
+		Input.start_joy_vibration(0, .1, 0, .5)
 
 
 func _on_reload_timer_timeout():

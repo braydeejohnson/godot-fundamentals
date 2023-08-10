@@ -1,10 +1,67 @@
 extends Node2D
+class_name Game
 
-@export var tank: Tank
+@export var TankScene: PackedScene
+@export var WorldScene: PackedScene
 @export var ui: UI
 
-func _ready():
-	if !tank.collected.is_connected(ui._on_collected):
-		tank.collected.connect(ui._on_collected)
-	if !tank.reload_progress.is_connected(ui._on_reload_progress):
-		tank.reload_progress.connect(ui._on_reload_progress)
+@onready var camera: Camera = $Camera2D
+
+var world: World
+var tank: Tank
+var started = false
+
+enum INPUT_SCHEMES { KEYBOARD_AND_MOUSE, GAMEPAD, TOUCH_SCREEN }
+static var INPUT_SCHEME: INPUT_SCHEMES = INPUT_SCHEMES.KEYBOARD_AND_MOUSE
+
+func start_game():
+	world = WorldScene.instantiate()
+	add_child(world)
+	move_child(world, 0)
+	
+	tank = TankScene.instantiate()
+	world.add_child(tank)	
+	tank.position = Vector2(922, 623)
+	tank.collected.connect(ui._on_collected)
+	tank.reload_progress.connect(ui._on_reload_progress)
+	tank.has_control = false
+	
+	camera.change_target(tank)
+	get_tree().paused = false
+
+	await get_tree().create_timer(2).timeout	
+	var crate: Crate = World.get_closest_crate_to(tank.position)
+	if !crate:
+		return
+	
+	camera.change_mode(Camera.MODES.TARGET)
+	camera.change_target(crate)
+	UI.open_letterbox()
+	
+	
+	await get_tree().create_timer(3).timeout
+	UI.close_letterbox()
+	camera.change_target(tank)
+	camera.change_mode(Camera.MODES.TARGET_MOUSE_BLENDED)	
+	if tank:
+		tank.has_control = true
+	
+
+func _on_ui_layer_start_game():
+	start_game()
+
+
+func _on_ui_layer_quit_to_menu():
+	if world:
+		world.queue_free()
+		world = null
+	tank = null
+	camera.reset()
+
+
+func _on_ui_layer_menu_closed():
+	get_tree().paused = false
+
+
+func _on_ui_layer_menu_opened():
+	get_tree().paused = true

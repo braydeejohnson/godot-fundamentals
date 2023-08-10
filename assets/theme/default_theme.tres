@@ -1,0 +1,69 @@
+[gd_resource type="Theme" load_steps=12 format=3 uid="uid://d4mh7dapstd04"]
+
+[ext_resource type="FontFile" uid="uid://dtywkluh6lms5" path="res://assets/fonts/Early GameBoy.ttf" id="1_a4rm2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hcgk0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e4q8t"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6dwbv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sv735"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_58eur"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3rk6s"]
+bg_color = Color(0.192157, 0.192157, 0.192157, 1)
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4gkns"]
+bg_color = Color(0.192157, 0.192157, 0.192157, 1)
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_koggq"]
+bg_color = Color(0.192157, 0.192157, 0.192157, 1)
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_evigo"]
+content_margin_left = 3.0
+content_margin_right = 3.0
+bg_color = Color(0.215686, 0.239216, 0.270588, 0.596078)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0x14j"]
+bg_color = Color(0.192157, 0.192157, 0.192157, 1)
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[resource]
+default_font = ExtResource("1_a4rm2")
+default_font_size = 16
+Button/styles/disabled = SubResource("StyleBoxEmpty_hcgk0")
+Button/styles/focus = SubResource("StyleBoxEmpty_e4q8t")
+Button/styles/hover = SubResource("StyleBoxEmpty_6dwbv")
+Button/styles/normal = SubResource("StyleBoxEmpty_sv735")
+Button/styles/pressed = SubResource("StyleBoxEmpty_58eur")
+RemapButton/base_type = &"Button"
+RemapButton/styles/disabled = SubResource("StyleBoxFlat_3rk6s")
+RemapButton/styles/focus = SubResource("StyleBoxFlat_4gkns")
+RemapButton/styles/hover = SubResource("StyleBoxFlat_koggq")
+RemapButton/styles/normal = SubResource("StyleBoxFlat_evigo")
+RemapButton/styles/pressed = SubResource("StyleBoxFlat_0x14j")

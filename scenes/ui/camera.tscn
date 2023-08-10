@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://ft674vshvv02"]
+
+[ext_resource type="Script" path="res://scenes/ui/camera.gd" id="1_vva6i"]
+
+[node name="Camera2D" type="Camera2D" groups=["Camera"]]
+limit_left = 0
+limit_top = 0
+limit_right = 3024
+limit_bottom = 1569
+position_smoothing_enabled = true
+position_smoothing_speed = 4.0
+script = ExtResource("1_vva6i")
+SMOOTH_SPEED = 2.0

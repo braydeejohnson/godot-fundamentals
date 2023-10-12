@@ -314,6 +314,7 @@ radial_fill_degrees = 90.0
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
+mouse_default_cursor_shape = 1
 
 [node name="Letterbox" type="Control" parent="Control"]
 unique_name_in_owner = true
@@ -369,8 +370,6 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 960.0
-offset_bottom = 544.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(960, 544)
